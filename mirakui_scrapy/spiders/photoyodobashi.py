@@ -14,18 +14,17 @@ class PhotoyodobashiSpider(scrapy.Spider):
 
     def parse(self, response):
         for sel in response.css('#grid-content a'):
-            entry = Entry()
-            entry['url'] = urljoin(self.base_url, sel.css('::attr("href")').extract_first())
+            url = urljoin(self.base_url, sel.css('::attr("href")').extract_first())
 
-            entry['title'] = sel.css('img::attr("alt")').extract_first()
-            if entry['title'] == '':
+            title = sel.css('img::attr("alt")').extract_first()
+            if title == '':
                 continue
 
-            entry['image_url'] = urljoin(self.base_url, sel.css('img::attr("src")').extract_first())
-            if '/img/common/sidemenu/' in entry['image_url']:
+            image_url = urljoin(self.base_url, sel.css('img::attr("src")').extract_first())
+            if '/img/common/sidemenu/' in image_url:
                 continue
 
             # 'http://photo.yodobashi.com/img/home/20160125_diary.jpg'
             # -> '20160125_diary'
-            entry['entry_id'] = re.sub(r'^.*/([^/]+)\.[^\.]+$', r'\1', entry['image_url'])
-            yield entry
+            entry_id = re.sub(r'^.*/([^/]+)\.[^\.]+$', r'\1', image_url)
+            yield Entry(url=url, title=title, image_url=image_url, entry_id=entry_id)
