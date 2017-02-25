@@ -46,9 +46,11 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'mirakui_scrapy.middlewares.MirakuiScrapySpiderMiddleware': 543,
-#}
+SPIDER_MIDDLEWARES = {
+    'mirakui_scrapy.middlewares.MirakuiScrapySpiderMiddleware': 543,
+#    'scrapy_deltafetch.DeltaFetch': 100,
+}
+#DELTAFETCH_ENABLED = True
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
@@ -64,9 +66,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'mirakui_scrapy.pipelines.MirakuiScrapyPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'mirakui_scrapy.pipelines.MirakuiScrapyPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
