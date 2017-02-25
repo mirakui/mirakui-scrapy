@@ -1,2 +1,4 @@
 projects:
-  default: 160948
+  default: 160967
+stacks:
+    default: scrapy:1.1-py3
