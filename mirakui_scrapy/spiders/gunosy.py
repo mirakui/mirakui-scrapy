@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from mirakui_scrapy.items import MirakuiScrapyItem
+from mirakui_scrapy.items import Entry
 
 
 class GunosySpider(scrapy.Spider):
@@ -21,10 +21,10 @@ class GunosySpider(scrapy.Spider):
 
     def parse(self, response):
         for sel in response.css("div.list_content"):
-            article = MirakuiScrapyItem()
-            article['title'] = sel.css("div.list_title > a::text").extract_first()
-            article['url'] = sel.css("div.list_title > a::attr('href')").extract_first()
-            yield article
+            entry = Entry()
+            entry['title'] = sel.css("div.list_title > a::text").extract_first()
+            entry['url'] = sel.css("div.list_title > a::attr('href')").extract_first()
+            yield entry
 
         next_page = response.css("div.page-link-option > a::attr('href')")
         if next_page:
