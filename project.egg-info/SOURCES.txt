@@ -6,6 +6,7 @@ mirakui_scrapy/pipelines.py
 mirakui_scrapy/settings.py
 mirakui_scrapy/spiders/__init__.py
 mirakui_scrapy/spiders/gunosy.py
+mirakui_scrapy/spiders/photoyodobashi.py
 project.egg-info/PKG-INFO
 project.egg-info/SOURCES.txt
 project.egg-info/dependency_links.txt
