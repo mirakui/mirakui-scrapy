@@ -2,8 +2,8 @@ setup.py
 mirakui_scrapy/__init__.py
 mirakui_scrapy/items.py
 mirakui_scrapy/middlewares.py
-mirakui_scrapy/pipelines.py
 mirakui_scrapy/settings.py
+mirakui_scrapy/spider_status_store.py
 mirakui_scrapy/spiders/__init__.py
 mirakui_scrapy/spiders/gunosy.py
 mirakui_scrapy/spiders/photoyodobashi.py
