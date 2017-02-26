@@ -5,13 +5,22 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-from scrapy.exceptions import DropItem
+import scrapy
 from mirakui_scrapy.spider_status_store import SpiderStatusStore
 
 class EntryDeltaPipeline(object):
-    def __init__(self):
+    def __init__(self, store):
         self.latest_entry_id = {}
-        self.store = SpiderStatusStore()
+        self.store = store
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        store = SpiderStatusStore(
+            table_name=crawler.settings.get('SPIDER_STATUS_STORE_TABLE_NAME'),
+            aws_access_key_id=crawler.settings.get('AWS_ACCESS_KEY_ID'),
+            aws_secret_access_key=crawler.settings.get('AWS_SECRET_ACCESS_KEY'),
+        )
+        return cls(store=store)
 
     def open_spider(self, spider):
         entry_id = self.store.get(spider.name)
@@ -24,4 +33,4 @@ class EntryDeltaPipeline(object):
                 self.store.set(spider.name, item['id'])
             return item
         else:
-            raise DropItem
+            raise scrapy.exceptions.DropItem

@@ -2,11 +2,20 @@
 import boto3
 
 class SpiderStatusStore:
-    table_name = 'scrapy_statuses'
-    region = 'ap-northeast-1'
+
+    def __init__(self, table_name, aws_access_key_id, aws_secret_access_key, aws_region='ap-northeast-1'):
+        self.table_name = table_name
+        self.aws_access_key_id = aws_access_key_id
+        self.aws_secret_access_key = aws_secret_access_key
+        self.aws_region = aws_region
 
     def db(self):
-        return boto3.resource('dynamodb', region_name=self.region)
+        return boto3.resource(
+            'dynamodb',
+            region_name=self.aws_region,
+            aws_access_key_id=self.aws_access_key_id,
+            aws_secret_access_key=self.aws_secret_access_key
+        )
 
     def table(self):
         return self.db().Table(self.table_name)
