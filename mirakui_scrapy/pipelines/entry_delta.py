@@ -18,9 +18,9 @@ class EntryDeltaPipeline(object):
         self.latest_entry_id[spider.name] = entry_id
 
     def process_item(self, item, spider):
-        if item['entry_id'] > self.latest_entry_id[spider.name]:
-            self.latest_entry_id[spider.name] = item['entry_id']
-            self.store.set(spider.name, item['entry_id'])
+        if item['id'] > self.latest_entry_id[spider.name]:
+            self.latest_entry_id[spider.name] = item['id']
+            self.store.set(spider.name, item['id'])
             return item
         else:
             raise DropItem

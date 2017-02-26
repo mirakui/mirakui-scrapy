@@ -27,4 +27,4 @@ class PhotoyodobashiSpider(scrapy.Spider):
             # 'http://photo.yodobashi.com/img/home/20160125_diary.jpg'
             # -> '20160125_diary'
             entry_id = re.sub(r'^.*/([^/]+)\.[^\.]+$', r'\1', image_url)
-            yield Entry(url=url, title=title, image_url=image_url, entry_id=entry_id)
+            yield Entry(url=url, title=title, image_url=image_url, id=entry_id)
