@@ -9,6 +9,7 @@ mirakui_scrapy/pipelines/entry_delta.py
 mirakui_scrapy/pipelines/slack_notifier.py
 mirakui_scrapy/spiders/__init__.py
 mirakui_scrapy/spiders/gunosy.py
+mirakui_scrapy/spiders/manga_fgo2.py
 mirakui_scrapy/spiders/photoyodobashi.py
 project.egg-info/PKG-INFO
 project.egg-info/SOURCES.txt
