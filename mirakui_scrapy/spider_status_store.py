@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import boto3
 
-class DynamoDB:
+class SpiderStatusStore:
     table_name = 'scrapy_statuses'
     region = 'ap-northeast-1'
 
