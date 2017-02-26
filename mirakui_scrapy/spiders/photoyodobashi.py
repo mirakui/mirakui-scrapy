@@ -17,7 +17,7 @@ class PhotoyodobashiSpider(scrapy.Spider):
     }
 
     def parse(self, response):
-        for sel in response.css('#grid-content a'):
+        for sel in reversed(response.css('#grid-content a')):
             url = urljoin(self.base_url, sel.css('::attr("href")').extract_first())
 
             title = sel.css('img::attr("alt")').extract_first()
