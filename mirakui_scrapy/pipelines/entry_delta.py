@@ -27,7 +27,7 @@ class EntryDeltaPipeline(object):
         self.latest_entry_id[spider.name] = entry_id
 
     def process_item(self, item, spider):
-        if item['id'] > self.latest_entry_id[spider.name]:
+        if not spider.name in self.latest_entry_id or item['id'] > self.latest_entry_id[spider.name]:
             if not spider.settings.getbool('DONT_UPDATE_ENTRY_DELTA'):
                 self.latest_entry_id[spider.name] = item['id']
                 self.store.set(spider.name, item['id'])

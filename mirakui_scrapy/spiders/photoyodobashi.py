@@ -7,10 +7,9 @@ from mirakui_scrapy.items import Entry
 
 
 class PhotoyodobashiSpider(scrapy.Spider):
-    base_url = 'http://photo.yodobashi.com/'
     name = 'photoyodobashi'
     allowed_domains = ['photo.yodobashi.com']
-    start_urls = [base_url]
+    start_urls = ['http://photo.yodobashi.com/']
 
     custom_settings = {
         'SLACK_USERNAME': 'フォトヨドバシ',
@@ -18,13 +17,13 @@ class PhotoyodobashiSpider(scrapy.Spider):
 
     def parse(self, response):
         for sel in reversed(response.css('#grid-content a')):
-            url = urljoin(self.base_url, sel.css('::attr("href")').extract_first())
+            url = urljoin(response.url, sel.css('::attr("href")').extract_first())
 
             title = sel.css('img::attr("alt")').extract_first()
             if title == '':
                 continue
 
-            image_url = urljoin(self.base_url, sel.css('img::attr("src")').extract_first())
+            image_url = urljoin(response.url, sel.css('img::attr("src")').extract_first())
             if '/img/common/sidemenu/' in image_url:
                 continue
 
