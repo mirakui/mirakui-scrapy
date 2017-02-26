@@ -5,7 +5,7 @@ import json
 class SlackNotifierPipeline:
 
     def process_item(self, item, spider):
-        default_webhook_url = spider.settings['SLACK_WEBHOOK']
+        default_webhook_url = spider.settings['SLACK_DEFAULT_WEBHOOK']
         webhook_url = self.__get_setting(spider, 'WEBHOOK', default_webhook_url)
 
         slack_data = {}
@@ -36,7 +36,7 @@ class SlackNotifierPipeline:
         return item
 
     def __get_setting(self, spider, suffix, default_value=None):
-        value = spider.settings['SCRAPY_SLACK_%s_%s' % (spider.name.upper(), suffix)]
+        value = spider.settings['SLACK_%s_%s' % (spider.name.upper(), suffix)]
         if value:
             return value
         else:
