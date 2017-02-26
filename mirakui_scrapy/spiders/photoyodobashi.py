@@ -12,6 +12,10 @@ class PhotoyodobashiSpider(scrapy.Spider):
     allowed_domains = ['photo.yodobashi.com']
     start_urls = [base_url]
 
+    custom_settings = {
+        'SLACK_USERNAME': 'フォトヨドバシ',
+    }
+
     def parse(self, response):
         for sel in response.css('#grid-content a'):
             url = urljoin(self.base_url, sel.css('::attr("href")').extract_first())

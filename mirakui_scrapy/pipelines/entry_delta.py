@@ -19,8 +19,9 @@ class EntryDeltaPipeline(object):
 
     def process_item(self, item, spider):
         if item['id'] > self.latest_entry_id[spider.name]:
-            self.latest_entry_id[spider.name] = item['id']
-            self.store.set(spider.name, item['id'])
+            if not spider.settings.getbool('DONT_UPDATE_ENTRY_DELTA'):
+                self.latest_entry_id[spider.name] = item['id']
+                self.store.set(spider.name, item['id'])
             return item
         else:
             raise DropItem

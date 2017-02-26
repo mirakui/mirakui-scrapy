@@ -68,6 +68,7 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'mirakui_scrapy.pipelines.entry_delta.EntryDeltaPipeline': 300,
+    'mirakui_scrapy.pipelines.slack_notifier.SlackNotifierPipeline': 310,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
