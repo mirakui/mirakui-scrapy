@@ -1,0 +1,5 @@
+scrapy
+shub
+scrapy-deltafetch
+requests
+boto3
