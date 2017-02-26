@@ -7,7 +7,7 @@
 
 from mirakui_scrapy.dynamodb import DynamoDB
 
-class MirakuiScrapyPipeline(object):
+class EntryDeltaPipeline(object):
     def __init__(self):
         self.latest_entry_id = {}
         self.db = DynamoDB()
