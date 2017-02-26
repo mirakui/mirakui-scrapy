@@ -19,7 +19,7 @@ class SlackNotifierPipeline:
         if username:
             slack_data['username'] = username
 
-        channel = self.__get_setting(spider, 'SLACK_CHANNEL')
+        channel = self.__get_setting(spider, 'CHANNEL')
         if channel:
             slack_data['channel'] = channel
 
