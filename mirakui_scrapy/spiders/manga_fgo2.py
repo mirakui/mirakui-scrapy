@@ -18,7 +18,7 @@ class MangaFgo2(scrapy.Spider):
     def parse(self, response):
         for sel in reversed(response.css('#index ul li')):
             url = urljoin(response.url, sel.css('a::attr("href")').extract_first())
-            return scrapy.Request(url, callback=self.parse_detail)
+            yield scrapy.Request(url, callback=self.parse_detail)
 
     def parse_detail(self, response):
         image = response.css('#contents p.comic img')
@@ -28,4 +28,4 @@ class MangaFgo2(scrapy.Spider):
         # -> '00063'
         comic_num = re.sub(r'^.+/comic(\d+)\.html$', r'\1', response.url)
         entry_id = '%05d' % int(comic_num)
-        return Entry(url=response.url, title=title, image_url=image_url, id=entry_id)
+        yield Entry(url=response.url, title=title, image_url=image_url, id=entry_id)
