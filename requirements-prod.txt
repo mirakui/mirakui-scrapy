@@ -1,0 +1,4 @@
+scrapy
+requests
+boto3
+awscli>=1.11
