@@ -5,6 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
+from scrapy.exceptions import DropItem
 from mirakui_scrapy.spider_status_store import SpiderStatusStore
 
 class EntryDeltaPipeline(object):
@@ -22,4 +23,4 @@ class EntryDeltaPipeline(object):
             self.store.set(spider.name, item['entry_id'])
             return item
         else:
-            pass
+            raise DropItem
